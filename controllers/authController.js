@@ -60,8 +60,21 @@ async function handleUserLogin(req, res) {
   }
 }
 
+// Get the User Data From the Database of the Specific User
+async function handleGetUserData(req, res) {
+  const { userId } = req.query;
+  console.log(req.query);
+  if (!userId) {
+    return res.status(400).json({ error: "Please Enter the User ID" });
+  } else {
+    const result = await User.findById(userId);
+    return res.status(200).json({ Status: true, Success: result });
+  }
+}
+
 // Exports The Function
 module.exports = {
   handleUserSignUp,
   handleUserLogin,
+  handleGetUserData,
 };

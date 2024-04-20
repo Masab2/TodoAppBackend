@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const { connectToDb } = require("./connection/connection");
 const authroutes = require('./routes/approutes')
@@ -5,7 +6,7 @@ const todoroutes = require('./routes/todoRoutes')
 const todoModel = require("./Models/todoModel");
 const body_parser = require("body-parser");
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 // MidleWares
 app.use(express.json());
@@ -15,7 +16,7 @@ app.use('/user',todoroutes)
 app.use(body_parser.json());
 
 // Connect To Mongo DB
-connectToDb("mongodb://127.0.0.1:27017/newTodoDb")
+connectToDb(process.env.MONGO_URL)
   .then(() => {
     console.log(`Connected To Mongo Db ${PORT}`);
   })

@@ -1,6 +1,7 @@
 const {
   handleUserSignUp,
   handleUserLogin,
+  handleGetUserData,
 } = require("../controllers/authController");
 const express = require("express");
 
@@ -16,5 +17,8 @@ router.post("/login", handleUserLogin);
 router.get("/", (req, res) => {
   res.status(200).json({ message: "Server is Working" });
 });
+
+// get the user data
+router.get('/getUserData', handleGetUserData);
 
 module.exports = router;
